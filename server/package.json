@@ -6,13 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "dev:instance1": "cross-env INSTANCE=1 nodemon index.js",
-    "dev:instance2": "cross-env INSTANCE=2 nodemon index.js",
-    "dev:instance3": "cross-env INSTANCE=3 nodemon index.js",
     "seed": "node seed.js",
-    "seed:instance1": "node seed.js --instance=1",
-    "seed:instance2": "node seed.js --instance=2",
-    "seed:instance3": "node seed.js --instance=3",
     "seed:reset": "node seed.js --reset"
   },
   "dependencies": {
