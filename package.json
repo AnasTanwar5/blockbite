@@ -1,0 +1,29 @@
+{
+  "name": "blockbite",
+  "version": "1.0.0",
+  "description": "BLOCKBITE - Production-Ready Decentralized Food Delivery Application",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "node": "hardhat node",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "seed": "cd server && npm run seed",
+    "seed:reset": "cd server && npm run seed:reset",
+    "reset:db": "cd server && node clearTestData.js",
+    "instance1": "cd server && npm run dev:instance1",
+    "instance2": "cd server && npm run dev:instance2",
+    "instance3": "cd server && npm run dev:instance3",
+    "client:instance1": "cd client && npx vite --port 3001",
+    "client:instance2": "cd client && npx vite --port 3002",
+    "client:instance3": "cd client && npx vite --port 3003",
+    "start:multi": "powershell -ExecutionPolicy Bypass -File ./start-all-instances.ps1"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.2"
+  }
+}
