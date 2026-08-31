@@ -51,6 +51,11 @@ async function main() {
   await verifyDriverTx.wait();
   console.log(`✅ Driver verified: ${driverWallet}`);
 
+  // Also verify deployer wallet so admin/deployer can perform all roles on Sepolia
+  await (await escrow.setRestaurantVerification(deployer.address, true)).wait();
+  await (await escrow.setDriverVerification(deployer.address, true)).wait();
+  console.log(`✅ Deployer wallet verified for all roles: ${deployer.address}`);
+
   // 5. Extract ABIs & Addresses
   const tokenArtifact = await hre.artifacts.readArtifact("BlockBiteToken");
   const escrowArtifact = await hre.artifacts.readArtifact("BlockBiteEscrow");
