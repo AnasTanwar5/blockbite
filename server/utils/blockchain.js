@@ -1,7 +1,7 @@
 const { ethers } = require("ethers");
 
 const LOCAL_RPC_URL = process.env.LOCAL_RPC_URL || "http://127.0.0.1:8545";
-const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://rpc.sepolia.org";
+const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://ethereum-sepolia-rpc.publicnode.com";
 const ESCROW_ADDRESS = process.env.ESCROW_CONTRACT_ADDRESS || process.env.VITE_ESCROW_CONTRACT_ADDRESS || "";
 
 let cachedLocalProvider = null;
@@ -105,7 +105,7 @@ async function verifyOrderOnChain(txHash, orderId, escrowAddress, chainId) {
   const contractAddress = receipt.to || escrowAddress || ESCROW_ADDRESS;
   console.log("  querying contract:", contractAddress);
 
-  const provider = receipt.blockNumber ? getLocalProvider() : getLocalProvider();
+  const provider = usedProvider === "sepolia" ? getSepoliaProvider() : getLocalProvider();
   const escrow = new ethers.Contract(
     contractAddress,
     [

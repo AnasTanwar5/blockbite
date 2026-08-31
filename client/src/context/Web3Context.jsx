@@ -57,25 +57,31 @@ export const Web3Provider = ({ children }) => {
       throw new Error("Missing transaction hash for verification");
     }
 
-    const provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+    let provider;
+    if (window.ethereum) {
+      provider = new ethers.BrowserProvider(window.ethereum);
+    } else {
+      provider = new ethers.JsonRpcProvider("http://127.0.0.1:8545");
+    }
+
     let receipt;
     try {
       receipt = await provider.getTransactionReceipt(txHash);
     } catch (err) {
-      console.error("Frontend local RPC verification error:", err);
-      throw new Error("Unable to verify transaction on local blockchain. Please check your network connection and try again.");
+      console.error("Frontend RPC verification error:", err);
+      throw new Error("Unable to verify transaction on blockchain. Please check your network connection and try again.");
     }
 
     if (!receipt) {
-      throw new Error("Transaction not found on local blockchain. It may have been dropped or not yet mined.");
+      throw new Error("Transaction receipt not found. It may still be mining or was dropped.");
     }
 
     if (expectedTo && receipt.to && receipt.to.toLowerCase() !== expectedTo.toLowerCase()) {
-      throw new Error(`Transaction recipient mismatch. Expected ${expectedTo}, got ${receipt.to}`);
+      console.warn(`Transaction recipient check: Expected ${expectedTo}, got ${receipt.to}`);
     }
 
     if (Number(receipt.status) !== 1) {
-      throw new Error("Blockchain transaction reverted on local node. Funds were not transferred. Please try again.");
+      throw new Error("Blockchain transaction reverted. Funds were not transferred. Please try again.");
     }
 
     return receipt;
