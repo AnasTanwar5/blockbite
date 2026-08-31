@@ -1,8 +1,12 @@
 require("@nomicfoundation/hardhat-toolbox");
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, "server/.env") });
 
-const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY || "0x0000000000000000000000000000000000000000000000000000000000000000";
-const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://rpc.sepolia.org";
+const rawPrivateKey = process.env.SEPOLIA_PRIVATE_KEY || "";
+const SEPOLIA_PRIVATE_KEY = rawPrivateKey
+  ? (rawPrivateKey.startsWith("0x") ? rawPrivateKey : `0x${rawPrivateKey}`)
+  : "0x0000000000000000000000000000000000000000000000000000000000000000";
+const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://ethereum-sepolia-rpc.publicnode.com";
 
 module.exports = {
   solidity: {

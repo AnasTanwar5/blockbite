@@ -1,8 +1,8 @@
 {
-  "network": "localhost",
-  "chainId": 31337,
+  "network": "sepolia",
+  "chainId": 11155111,
   "token": {
-    "address": "0xA51c1fc2f0D1a1b8494Ed1FE312d7C3a78Ed91C0",
+    "address": "0x5208c7DF135dc949D3000FB78CBB22FBae7A695F",
     "abi": [
       {
         "inputs": [
@@ -431,7 +431,7 @@
     ]
   },
   "escrow": {
-    "address": "0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82",
+    "address": "0xA5458D47c76E7Fe69bB794662407962114860F6c",
     "abi": [
       {
         "inputs": [
@@ -1412,5 +1412,5 @@
       }
     ]
   },
-  "deployedAt": "2026-08-31T14:27:29.720Z"
+  "deployedAt": "2026-08-31T16:16:00.210Z"
 }
